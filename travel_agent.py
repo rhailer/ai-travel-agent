@@ -30,9 +30,11 @@ class TravelPlan:
 
 class TravelAgent:
     def __init__(self):
-        self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        if not os.getenv("OPENAI_API_KEY"):
+        api_key = os.getenv("OPENAI_API_KEY")
+        if not api_key:
             raise ValueError("OpenAI API key not found. Please set OPENAI_API_KEY in your .env file")
+    
+        self.client = OpenAI(api_key=api_key)
     
     def validate_preferences(self, preferences: TravelPreferences) -> List[str]:
         """Validate user preferences and return any errors"""
